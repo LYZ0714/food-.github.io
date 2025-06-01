@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -8,45 +9,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* ===== 基本重置 & 字體 ===== */
         * { box-sizing: border-box; }
         body {
             margin: 0; padding: 0;
-            font-family: "Microsoft JhengHei", sans-serif; /* 使用微軟正黑體 */
-            background: #fdfaf5; /* 更柔和的背景色 */
-            color: #333; /* 調整主要文字顏色 */
-            min-height: 100vh; /* 確保 body 佔滿整個視窗高度 */
-            font-size: 1.15rem; /* 整體基礎字體調整為 rem 單位，更具彈性 */
-            line-height: 1.7; /* 增加行高，提升閱讀性 */
-            -webkit-font-smoothing: antialiased; /* 字體抗鋸齒 */
-            -moz-osx-font-smoothing: grayscale; /* 字體抗鋸齒 */
+            font-family: "Microsoft JhengHei", sans-serif;
+            background: #fdfaf5;
+            color: #333; 
+            min-height: 100vh; 
+            font-size: 1.15rem; 
+            line-height: 1.7; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
         }
-        h1, h2, h3 { margin: .6em 0; color: #d35400; /* 標題使用更深的美食橘色 */ font-weight: 700; }
-        h1 { font-size: 3.5rem; /* 放大 */ line-height: 1.2; }
-        h2 { font-size: 2.8rem; /* 放大 */ line-height: 1.3; }
-        h3 { font-size: 2.0rem; /* 放大 */ line-height: 1.4; }
+        h1, h2, h3 { margin: .6em 0; color: #d35400;font-weight: 700; }
+        h1 { font-size: 3.5rem; line-height: 1.2; }
+        h2 { font-size: 2.8rem; line-height: 1.3; }
+        h3 { font-size: 2.0rem; line-height: 1.4; }
 
-        /* ===== 新增的頂部導覽列樣式 ===== */
         .main-navbar {
-            background-color: #FFF3E0; /* 導覽列背景色更淺 */
-            padding: 1.2rem 3rem; /* 內邊距加大 */
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* 陰影更明顯 */
-            position: sticky; /* 讓導覽列在滾動時固定在頂部 */
+            background-color: #FFF3E0; 
+            padding: 1.2rem 3rem; 
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); 
+            position: sticky; 
             top: 0;
-            z-index: 50; /* 確保在其他內容之上 */
+            z-index: 50;
         }
         .main-navbar .navbar-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1300px; /* 限制導覽列內容寬度加大 */
+            max-width: 1300px; 
             margin: 0 auto;
         }
         .main-navbar .navbar-brand {
             font-family: 'Georgia', serif;
-            font-size: 2.3rem; /* 品牌名稱放大 */
+            font-size: 2.3rem;
             font-weight: bold;
-            color: #e65100; /* 品牌名稱顏色 */
+            color: #e65100;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -58,75 +57,71 @@
             margin: 0;
             padding: 0;
             display: flex;
-            gap: 2.5rem; /* 連結間距稍微縮小，更緊湊 */
+            gap: 2.5rem; 
         }
         .main-navbar .navbar-links a {
-            color: #4a4a4a; /* 連結文字顏色調整為深色，增加對比 */
+            color: #4a4a4a; 
             text-decoration: none;
-            font-weight: 600; /* 調整字重 */
-            font-size: 1.25rem; /* 連結文字稍微縮小 */
-            padding: 0.6rem 1rem; /* 增加左右內邊距，提供更好的點擊區域 */
-            border-radius: 0.5rem; /* 增加圓角 */
-            transition: all 0.3s ease; /* 統一過渡效果 */
-            border-bottom: 4px solid transparent; /* 預設透明下劃線 */
+            font-weight: 600; 
+            font-size: 1.25rem;
+            padding: 0.6rem 1rem; 
+            border-radius: 0.5rem;
+            transition: all 0.3s ease; 
+            border-bottom: 4px solid transparent; 
         }
         .main-navbar .navbar-links a:hover {
-            color: #e65100; /* 懸停顏色更深 */
-            background-color: #ffe0b2; /* 懸停背景色 */
-            border-bottom: 4px solid #e65100; /* 懸停下劃線顏色 */
-            transform: translateY(-2px); /* 輕微上浮效果 */
+            color: #e65100; 
+            background-color: #ffe0b2;
+            border-bottom: 4px solid #e65100; 
+            transform: translateY(-2px); 
         }
         .main-navbar .navbar-links a.active {
-            color: #e65100; /* 活動狀態顏色 */
-            background-color: #ffe0b2; /* 活動狀態背景色 */
-            border-bottom: 4px solid #e65100; /* 活動狀態下劃線顏色 */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 活動狀態陰影 */
+            color: #e65100; 
+            background-color: #ffe0b2; 
+            border-bottom: 4px solid #e65100; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* 導覽列購物車圖示與數量 */
+    
         .main-navbar .navbar-links #navbarCartLink {
             position: relative;
             display: flex;
             align-items: center;
-            padding-right: 2.5rem; /* 為徽章留出空間 */
+            padding-right: 2.5rem; 
         }
         .main-navbar .navbar-links #cartItemCount {
-            background-color: #ff5722; /* 紅橙色徽章背景 */
+            background-color: #ff5722; 
             color: #fff;
             font-size: 0.85rem;
             font-weight: bold;
             border-radius: 50%;
-            padding: 0.2em 0.6em; /* 調整內邊距以形成良好形狀 */
+            padding: 0.2em 0.6em; 
             position: absolute;
-            top: -0.5em; /* 調整位置 */
-            right: 0.5em; /* 調整位置 */
-            min-width: 1.8em; /* 確保足以顯示兩位數 */
+            top: -0.5em;
+            right: 0.5em; 
+            min-width: 1.8em; 
             text-align: center;
-            line-height: 1; /* 防止額外行高影響位置 */
-            transform: translate(50%, -50%); /* 微調定位 */
-            pointer-events: none; /* 允許點擊穿透到連結 */
+            line-height: 1; 
+            transform: translate(50%, -50%); 
+            pointer-events: none; 
         }
 
-        /* ===== Hero 區塊樣式 ===== */
         .hero-section {
             position: relative;
             width: 100%;
-            height: 100vh; /* 佔滿視窗高度 */
-            background-color: #ffe8af; /* 淺黃色 */
-            /* 使用淺黃色背景的預留圖片 */
-            background-image: url('https://placehold.co/FFFDE7/E65100?text=Food+Paradise'); /* 調整圖片文字 */
-            background-size: cover;
+            height: 100vh; 
+            background-color: #ffe8af; 
+            background-image: url('https://placehold.co/FFFDE7/E65100?text=Food+Paradise'); 
             background-position: center;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* 垂直置中 */
-            align-items: center; /* 水平置中 */
+            justify-content: center; 
+            align-items: center;
             color: #fff;
-            overflow: hidden; /* 避免內容溢出 */
-            flex-shrink: 0; /* 防止在 flex 容器中縮小 */
+            overflow: hidden; 
+            flex-shrink: 0; 
         }
 
-        /* 移除半透明疊層，即移除黑色陰影 */
         .hero-section::before {
             content: '';
             position: absolute;
@@ -134,92 +129,89 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0); /* 將透明度設為0，移除陰影 */
-            z-index: 1; /* 確保在背景圖上，但在內容之下 */
+            background-color: rgba(0, 0, 0, 0); 
+            z-index: 1;
         }
 
-        /* Hero 內容樣式 */
         .hero-content {
-            position: relative; /* 確保內容在疊層之上 */
+            position: relative; 
             z-index: 2;
-            padding: 3rem; /* 加大內邊距 */
-            max-width: 1000px; /* 進一步加大內容寬度 */
-            text-align: center; /* 將文字改為置中對齊 */
+            padding: 3rem; 
+            max-width: 1000px;
+            text-align: center; 
         }
 
         .hero-subtitle {
-            font-size: 2.2rem; /* 顯著縮小字體 */
-            margin-bottom: 1.2rem; /* 增加間距 */
+            font-size: 2.2rem; 
+            margin-bottom: 1.2rem; 
             font-family: 'Georgia', serif;
             font-style: italic;
             color: #f8f8f8;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.6); /* 添加更明顯陰影 */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6); 
         }
 
         .hero-title {
-            font-size: 5.5rem; /* 顯著縮小字體 */
+            font-size: 5.5rem; 
             font-weight: bold;
             margin-top: 0;
-            margin-bottom: 3.5rem; /* 增加間距 */
+            margin-bottom: 3.5rem; 
             text-transform: uppercase;
             line-height: 1.1;
             color: #ffffff;
-            text-shadow: 3px 3px 8px rgba(0,0,0,0.8); /* 添加更明顯陰影 */
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
         }
 
         .hero-button {
-            background-color: #ffc107; /* 柔和的橘黃色按鈕 */
-            color: #333; /* 按鈕文字顏色調整為深色，以增加對比 */
-            padding: 1.6rem 4rem; /* 加大按鈕內邊距 */
+            background-color: #ffc107; 
+            color: #333; 
+            padding: 1.6rem 4rem; 
             border: none;
-            border-radius: 1rem; /* 圓角加大 */
-            font-size: 1.6rem; /* 加大字體 */
+            border-radius: 1rem;
+            font-size: 1.6rem; 
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             text-transform: uppercase;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.4); /* 按鈕陰影更明顯 */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4); 
         }
 
         .hero-button:hover {
-            background-color: #ffb300; /* 懸停時顏色更深一點 */
-            transform: translateY(-5px); /* 懸停時輕微上浮 */
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5); /* 懸停時陰影更深 */
+            background-color: #ffb300; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5); 
         }
 
-        /* ===== 主內容 ===== */
         main {
-            padding: 50px; /* 內邊距加大 */
+            padding: 50px; 
             flex: 1;
-            background-color: #fffdf8; /* 保持與 body 相似的背景色 */
-            max-width: 1300px; /* 限制主內容寬度加大 */
-            margin: 0 auto; /* 置中 */
+            background-color: #fffdf8; 
+            max-width: 1300px; 
+            margin: 0 auto; 
         }
-        /* 搜尋 + 下拉 + 類別按鈕 */
         .filter-row {
             display: flex; flex-wrap: wrap;
-            gap: 20px; /* 間距加大 */
-            margin-bottom: 30px; /* 間距加大 */
+            gap: 20px; 
+            margin-bottom: 30px; 
         }
         #searchInput, #categorySelect {
-            padding: 15px; /* 內邊距加大 */
-            font-size: 1.1rem; /* 字體調整 */
-            border: 1px solid #ccc; border-radius: 10px; /* 圓角加大 */
-            flex: 1 1 250px; /* 彈性寬度調整 */
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.08); /* 內陰影調整 */
+            padding: 15px; 
+            font-size: 1.1rem;
+            border: 1px solid #ccc; border-radius: 10px; 
+            flex: 1 1 250px; 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.08);
         }
         .category-buttons button {
-            padding: 12px 20px; /* 內邊距加大 */
-            font-size: 1.1rem; /* 字體調整 */
-            border: none; border-radius: 10px; /* 圓角加大 */
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border: none; border-radius: 10px; 
             background: #ffc107;
             color: #8b4513;
             cursor: pointer; transition: background .3s, transform .2s, box-shadow 0.3s ease;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* 陰影調整 */
-            font-weight: 600; /* 調整字重 */
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15); 
+            font-weight: 600;
         }
         .category-buttons button:hover {
-            transform: translateY(-3px); /* 懸停時輕微上浮 */
+            transform: translateY(-3px); 
             box-shadow: 0 5px 10px rgba(0,0,0,0.2);
         }
         .category-buttons button.active {
@@ -227,24 +219,23 @@
             color: #fff;
             box-shadow: 0 4px 8px rgba(0,0,0,0.25);
         }
-        .category-buttons { margin-bottom: 30px; /* 間距加大 */ }
+        .category-buttons { margin-bottom: 30px; }
 
-        /* ===== 商品格子 ===== */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); /* 最小寬度加大 */
-            gap: 30px; /* 間距加大 */
+            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+            gap: 30px; 
         }
         .menu-item {
             background: #ffffff;
-            border-radius: 18px; /* 圓角加大 */
+            border-radius: 18px; 
             overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* 陰影更明顯 */
-            font-size: 1.1rem; /* 字體調整 */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
+            font-size: 1.1rem; 
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
         }
         .menu-item:hover {
-            transform: translateY(-8px); /* 懸停時輕微上浮 */
+            transform: translateY(-8px); 
             box-shadow: 0 10px 22px rgba(0,0,0,0.3);
         }
         .menu-item img {
@@ -252,26 +243,26 @@
             object-fit: cover;
         }
         .menu-item h3 {
-            margin: 18px; font-size: 1.6rem; /* 字體調整 */
+            margin: 18px; font-size: 1.6rem;
             color: #d35400;
         }
         .menu-item p {
-            margin: 0 18px; font-size: 1.0rem; /* 字體調整 */
+            margin: 0 18px; font-size: 1.0rem;
             color: #666;
         }
         .menu-item .btn-group {
-            display: flex; gap: 15px; /* 間距加大 */
+            display: flex; gap: 15px;
             flex-wrap: wrap;
-            padding: 18px; /* 內邊距加大 */
+            padding: 18px; 
         }
         .menu-item button {
-            flex: 1; padding: 14px; /* 內邊距加大 */
-            border: none; border-radius: 12px; /* 圓角加大 */
-            font-size: 1.1rem; /* 字體調整 */
+            flex: 1; padding: 14px; 
+            border: none; border-radius: 12px; 
+            font-size: 1.1rem; 
             cursor: pointer;
             transition: background .3s, transform .2s, box-shadow 0.3s ease;
             box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-            font-weight: 600; /* 調整字重 */
+            font-weight: 600; 
         }
         .menu-item button:hover {
             transform: translateY(-3px);
@@ -292,62 +283,60 @@
             background: #e64a19;
         }
 
-        /* ===== 購物車區塊 ===== */
         #cart {
-            margin-top: 60px; /* 間距加大 */
-            background: #fff8e1; padding: 30px; /* 內邊距加大 */
-            border-radius: 15px; /* 圓角加大 */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 陰影調整 */
+            margin-top: 60px; 
+            background: #fff8e1; padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
         }
         .cart-item {
             display: flex; justify-content: space-between;
-            align-items: center; padding: 18px 0; /* 內邊距加大 */
+            align-items: center; padding: 18px 0; 
             border-bottom: 1px dashed #ffcc80;
             flex-wrap: wrap;
-            font-size: 1.1rem; /* 字體調整 */
+            font-size: 1.1rem; 
         }
         .qty-buttons, .remove-btn {
-            display: flex; gap: 12px; /* 間距加大 */
+            display: flex; gap: 12px; 
         }
         .qty-buttons button,
         .remove-btn {
-            padding: 10px 15px; font-size: 1.0rem; /* 字體調整 */
-            border: none; border-radius: 10px; /* 圓角加大 */
+            padding: 10px 15px; font-size: 1.0rem; 
+            border: none; border-radius: 10px; 
             cursor: pointer;
             transition: background .3s, transform .2s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-weight: 600; /* 調整字重 */
+            font-weight: 600;
         }
         .qty-buttons button:hover { background: #ffc107; transform: translateY(-2px); }
         .remove-btn { background: #e57373; color: #fff; }
         .remove-btn:hover { background: #d32f2f; transform: translateY(-2px); }
         .cart-total {
-            text-align: right; margin-top: 30px; /* 間距加大 */
-            font-size: 1.6rem; /* 字體調整 */
+            text-align: right; margin-top: 30px;
+            font-size: 1.6rem; 
             font-weight: bold;
             color: #e65100;
         }
 
-        /* ===== Modal 商品詳細 ===== */
         #detailModal, #messageModal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75); /* 更深的背景疊層 */
+            background: rgba(0,0,0,0.75); 
             display: none;
-            align-items: center; justify-content: center; padding: 30px; /* 內邊距加大 */
+            align-items: center; justify-content: center; padding: 30px; 
             z-index: 100;
         }
         #detailModal .modal-content, #messageModal .modal-content {
-            background: #fff; border-radius: 20px; /* 圓角加大 */
-            max-width: 650px; /* 調整最大寬度 */
-            width: 100%; padding: 40px; /* 內邊距加大 */
+            background: #fff; border-radius: 20px; 
+            max-width: 650px;
+            width: 100%; padding: 40px; 
             position: relative;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.4); /* 更明顯的陰影 */
-            text-align: center; /* 訊息內容置中 */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4); 
+            text-align: center; 
         }
         #detailModal .close-btn, #messageModal .close-btn {
-            position: absolute; top: 20px; right: 20px; /* 調整位置 */
-            background: none; border: none; font-size: 2.2rem; /* 加大字體 */
-            color: #999; /* 顏色調整 */
+            position: absolute; top: 20px; right: 20px; 
+            background: none; border: none; font-size: 2.2rem; 
+            color: #999; 
             cursor: pointer;
             transition: color 0.3s;
         }
@@ -356,20 +345,20 @@
         }
         #detailModal img {
             width: 100%; aspect-ratio:1/1; object-fit: cover;
-            border-radius: 12px; /* 圓角加大 */
-            margin-bottom: 25px; /* 間距加大 */
+            border-radius: 12px; 
+            margin-bottom: 25px; 
         }
         #detailModal h3 {
             margin: 0 0 15px; color: #e65100;
-            font-size: 2.0rem; /* 字體調整 */
+            font-size: 2.0rem; 
         }
         #detailModal p {
-            font-size: 1.2rem; /* 字體調整 */
+            font-size: 1.2rem; 
             color: #555;
             line-height: 1.8;
         }
         #messageModal p {
-            font-size: 1.5rem; /* 訊息文字加大 */
+            font-size: 1.5rem; 
             color: #333;
             margin-bottom: 25px;
         }
@@ -388,78 +377,76 @@
         }
 
 
-        /* 服務區塊的樣式 */
         .section {
-            padding: 4rem 3rem; /* 內邊距加大 */
-            max-width: 1200px; /* 寬度加大 */
-            margin: 60px auto; /* 調整上下邊距 */
+            padding: 4rem 3rem; 
+            max-width: 1200px; 
+            margin: 60px auto; 
             font-family: 'Inter', sans-serif;
             background-color: #fff8e1;
-            border-radius: 18px; /* 圓角加大 */
-            box-shadow: 0 6px 15px rgba(0,0,0,0.12); /* 陰影調整 */
+            border-radius: 18px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12); 
         }
         .section-title {
             text-align: center;
-            font-size: 3.0rem; /* 稍微加大字體 */
+            font-size: 3.0rem; 
             color: #e65100;
-            margin-bottom: 3.5rem; /* 間距加大 */
+            margin-bottom: 3.5rem; 
             font-weight: 700;
         }
         .services {
             display: flex;
             justify-content: space-around;
             text-align: center;
-            gap: 2.5rem; /* 調整間距，使其更緊湊 */
-            flex-wrap: nowrap; /* 預設不換行 */
+            gap: 2.5rem; 
+            flex-wrap: nowrap; 
         }
         .service {
-            flex: 1 1 320px; /* 調整基礎寬度 */
+            flex: 1 1 320px; 
             background-color: #ffffff;
-            padding: 2.5rem; /* 內邊距縮小 */
-            border-radius: 1.5rem; /* 圓角加大 */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* 更明顯的陰影 */
+            padding: 2.5rem; 
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
         }
         .service:hover {
-            transform: translateY(-12px); /* 向上輕微移動 */
+            transform: translateY(-12px); 
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
         .service i {
-            font-size: 4rem; /* 加大圖示大小 */
+            font-size: 4rem; 
             color: #ffc107;
             background: #fff3cd;
-            padding: 1.5rem; /* 內邊距縮小 */
+            padding: 1.5rem; 
             border-radius: 50%;
-            margin-bottom: 1.5rem; /* 間距縮小 */
+            margin-bottom: 1.5rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.18);
         }
         .service h3 {
-            font-size: 2.0rem; /* 字體調整 */
+            font-size: 2.0rem;
             color: #4a4a4a;
-            margin-bottom: 1rem; /* 間距縮小 */
+            margin-bottom: 1rem; 
         }
         .service p {
-            font-size: 1.1rem; /* 字體調整 */
+            font-size: 1.1rem; 
             color: #777;
-            line-height: 1.7; /* 行高調整 */
+            line-height: 1.7; 
         }
 
-        /* ===== 關於我們區塊樣式 ===== */
         .about-us-section {
             background-color: #fff8e1;
-            padding: 60px; /* 內邊距加大 */
-            border-radius: 20px; /* 圓角加大 */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* 陰影調整 */
+            padding: 60px; 
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
             max-width: 1200px;
             margin: 60px auto;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 40px; /* 間距加大 */
+            gap: 40px; 
         }
         .about-us-section .content {
             flex: 1;
-            min-width: 300px; /* 最小寬度 */
+            min-width: 300px; /
         }
         .about-us-section .image-container {
             flex: 1;
@@ -468,52 +455,51 @@
         }
         .about-us-section img {
             max-width: 100%;
-            border-radius: 15px; /* 圓角加大 */
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* 陰影調整 */
+            border-radius: 15px; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
         .about-us-section h2 {
-            text-align: left; /* 標題左對齊 */
+            text-align: left; 
             margin-bottom: 20px;
             color: #e65100;
         }
         .about-us-section p {
-            font-size: 1.1rem; /* 字體調整 */
+            font-size: 1.1rem; 
             color: #444;
             margin-bottom: 15px;
         }
 
-        /* ===== 表單區塊樣式 ===== */
         .contact-form {
             background-color: #fff8e1;
-            padding: 40px; /* 內邊距加大 */
-            border-radius: 18px; /* 圓角加大 */
+            padding: 40px; 
+            border-radius: 18px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.12);
-            max-width: 800px; /* 限制表單寬度加大 */
-            margin: 60px auto; /* 置中並增加上下間距 */
+            max-width: 800px; 
+            margin: 60px auto; 
         }
         .contact-form h2 {
             text-align: center;
-            margin-bottom: 40px; /* 間距加大 */
+            margin-bottom: 40px; 
             color: #e65100;
         }
         .form-group {
-            margin-bottom: 30px; /* 間距加大 */
+            margin-bottom: 30px; 
         }
         .form-group label {
             display: block;
-            margin-bottom: 12px; /* 間距加大 */
+            margin-bottom: 12px; 
             font-weight: bold;
             color: #555;
-            font-size: 1.1rem; /* 字體調整 */
+            font-size: 1.1rem; 
         }
         .form-group input[type="text"],
         .form-group input[type="email"],
         .form-group textarea {
             width: 100%;
-            padding: 16px; /* 內邊距加大 */
+            padding: 16px; 
             border: 1px solid #ddd;
-            border-radius: 12px; /* 圓角加大 */
-            font-size: 1.1rem; /* 字體調整 */
+            border-radius: 12px; 
+            font-size: 1.1rem; 
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.08);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
@@ -521,40 +507,39 @@
         .form-group input[type="email"]:focus,
         .form-group textarea:focus {
             border-color: #ffb300;
-            box-shadow: 0 0 0 5px rgba(255, 179, 0, 0.3); /* 聚焦時的陰影調整 */
+            box-shadow: 0 0 0 5px rgba(255, 179, 0, 0.3);
             outline: none;
         }
         .form-group textarea {
             resize: vertical;
-            min-height: 180px; /* 最小高度加大 */
+            min-height: 180px; 
         }
         .contact-form button[type="submit"] {
             display: block;
             width: 100%;
-            padding: 20px; /* 內邊距加大 */
+            padding: 20px; 
             border: none;
-            border-radius: 12px; /* 圓角加大 */
+            border-radius: 12px;
             background-color: #ff5722;
             color: #fff;
-            font-size: 1.3rem; /* 字體調整 */
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* 陰影調整 */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
         .contact-form button[type="submit"]:hover {
             background-color: #e64a19;
-            transform: translateY(-5px); /* 懸停時輕微上浮 */
+            transform: translateY(-5px); 
             box-shadow: 0 8px 16px rgba(0,0,0,0.4);
         }
 
-        /* ===== 頁尾樣式 ===== */
         footer {
             background-color: #333;
             color: #f8f8f8;
             padding: 40px 20px;
             text-align: center;
-            font-size: 1.0rem; /* 字體調整 */
+            font-size: 1.0rem;
             box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
         }
         footer .footer-content {
@@ -574,8 +559,6 @@
             color: #ffc107;
         }
 
-
-        /* ===== 響應式設計 ===== */
         @media (max-width: 1200px) {
             .main-navbar .navbar-container {
                 max-width: 960px;
@@ -584,10 +567,10 @@
                 max-width: 960px;
             }
             .hero-title {
-                font-size: 5rem; /* 調整字體大小 */
+                font-size: 5rem; 
             }
             .hero-subtitle {
-                font-size: 2.0rem; /* 調整字體大小 */
+                font-size: 2.0rem; 
             }
             .hero-button {
                 padding: 1.4rem 3.5rem;
@@ -600,11 +583,11 @@
                 font-size: 2.8rem;
             }
             .services {
-                gap: 2rem; /* 調整間距 */
+                gap: 2rem; 
             }
             .service {
                 flex: 1 1 280px;
-                padding: 2.2rem; /* 調整內邊距 */
+                padding: 2.2rem; 
             }
             .about-us-section {
                 padding: 50px;
@@ -621,7 +604,7 @@
 
         @media (max-width: 992px) {
             body {
-                font-size: 1rem; /* 調整基礎字體 */
+                font-size: 1rem;
             }
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2.1rem; }
@@ -643,10 +626,10 @@
                 height: 75vh;
             }
             .hero-title {
-                font-size: 4.5rem; /* 調整字體大小 */
+                font-size: 4.5rem; 
             }
             .hero-subtitle {
-                font-size: 1.8rem; /* 調整字體大小 */
+                font-size: 1.8rem; 
             }
             .hero-button {
                 padding: 1.2rem 3rem;
@@ -718,24 +701,24 @@
                 font-size: 2.5rem;
             }
             .services {
-                gap: 1.5rem; /* 調整間距 */
+                gap: 1.5rem;
             }
             .service {
                 flex: 1 1 280px;
-                padding: 2rem; /* 調整內邊距 */
+                padding: 2rem; 
             }
             .service i {
-                font-size: 3.5rem; /* 調整圖示大小 */
-                padding: 1.2rem; /* 調整內邊距 */
-                margin-bottom: 1.2rem; /* 調整間距 */
+                font-size: 3.5rem; 
+                padding: 1.2rem; 
+                margin-bottom: 1.2rem;
             }
             .service h3 {
-                font-size: 1.8rem; /* 調整字體大小 */
-                margin-bottom: 0.8rem; /* 調整間距 */
+                font-size: 1.8rem; 
+                margin-bottom: 0.8rem;
             }
             .service p {
-                font-size: 1.05rem; /* 調整字體大小 */
-                line-height: 1.6; /* 調整行高 */
+                font-size: 1.05rem; 
+                line-height: 1.6; 
             }
             .about-us-section {
                 padding: 40px;
@@ -754,7 +737,7 @@
 
         @media (max-width: 768px) {
             body {
-                font-size: 0.9rem; /* 調整基礎字體 */
+                font-size: 0.9rem; 
             }
             h1 { font-size: 2.0rem; }
             h2 { font-size: 1.7rem; }
@@ -777,13 +760,13 @@
                 font-size: 0.95rem;
             }
             .hero-section {
-                height: 60vh; /* 小螢幕高度調整 */
+                height: 60vh; 
             }
             .hero-title {
-                font-size: 2.5rem; /* 調整字體大小 */
+                font-size: 2.5rem;
             }
             .hero-subtitle {
-                font-size: 1.4rem; /* 調整字體大小 */
+                font-size: 1.4rem; 
             }
             .hero-button {
                 padding: 0.9rem 2.2rem;
@@ -791,7 +774,7 @@
             }
 
             main {
-                padding: 20px; /* 主內容調整內邊距 */
+                padding: 20px; 
             }
             .filter-row {
                 gap: 10px;
@@ -806,7 +789,7 @@
                 font-size: 0.9rem;
             }
             .menu-grid {
-                grid-template-columns: 1fr; /* 商品格子單欄顯示 */
+                grid-template-columns: 1fr;
                 gap: 15px;
             }
             .menu-item {
@@ -855,7 +838,6 @@
                 font-size: 2.0rem;
             }
             .services {
-                /* 在小螢幕上允許換行，以避免水平滾動條 */
                 flex-wrap: wrap;
                 gap: 1.2rem;
             }
@@ -1031,7 +1013,7 @@
     </footer>
 
     <script>
-        // 商品數據
+   
         const products = [
             { id:1,name:"原味舒肥雞胸",category:"肉品",price:150,desc:"滋嫩多肉，美味可口。採用低溫慢煮技術，完整保留雞肉的鮮甜與營養，口感軟嫩多汁，是健康飲食的絕佳選擇。",img:"1.jpg" },
             { id:2,name:"舒肥義式香料雞翅",category:"肉品",price:250,desc:"低脂高蛋白的健康首選。以多種義式香料醃製，風味獨特，搭配舒肥烹調，肉質鮮嫩入味，令人回味無窮。",img:"2.jpg" },
@@ -1043,25 +1025,25 @@
             { id:8,name:"牛丼",category:"主菜",price:90,desc:"鮮嫩多汁，特製醬汁",img:"8.jpg" },
             { id:9,name:"番茄牛腱",category:"肉品",price:100,desc:"慢燉洋蔥的香甜與濃郁起司的結合，口感豐富，溫暖開胃，是法式料理的經典開胃菜。",img:"9.jpg" },
         ];
-        const cart = {}; // 購物車物件，以商品ID為鍵，儲存數量
-        const menuEl = document.getElementById("menuItems"); // 菜單商品列表容器
-        const searchEl = document.getElementById("searchInput"); // 搜尋輸入框
-        const catEl = document.getElementById("categorySelect"); // 分類選擇下拉菜單
-        const cartList = document.getElementById("cartList"); // 購物車商品列表容器
-        const totalEl = document.getElementById("total"); // 總金額顯示元素
-        const detailModal = document.getElementById("detailModal"); // 商品詳細資訊彈出視窗
-        const modalImg = document.getElementById("modalImg"); // 彈出視窗中的商品圖片
-        const modalName = document.getElementById("modalName"); // 彈出視窗中的商品名稱
-        const modalDesc = document.getElementById("modalDesc"); // 彈出視窗中的商品描述
-        const categoryButtons = document.querySelectorAll(".category-buttons button"); // 類別按鈕
-        const cartItemCountEl = document.getElementById("cartItemCount"); // 導覽列購物車商品數量顯示元素
-        const contactForm = document.getElementById("contactForm"); // 聯絡表單
-        const messageModal = document.getElementById("messageModal"); // 訊息彈出視窗
-        const messageText = document.getElementById("messageText"); // 訊息彈出視窗的文字內容
+        const cart = {}; 
+        const menuEl = document.getElementById("menuItems"); 
+        const searchEl = document.getElementById("searchInput"); 
+        const catEl = document.getElementById("categorySelect"); 
+        const cartList = document.getElementById("cartList"); 
+        const totalEl = document.getElementById("total"); 
+        const detailModal = document.getElementById("detailModal");
+        const modalImg = document.getElementById("modalImg"); 
+        const modalName = document.getElementById("modalName");
+        const modalDesc = document.getElementById("modalDesc"); 
+        const categoryButtons = document.querySelectorAll(".category-buttons button"); 
+        const cartItemCountEl = document.getElementById("cartItemCount"); 
+        const contactForm = document.getElementById("contactForm");
+        const messageModal = document.getElementById("messageModal"); 
+        const messageText = document.getElementById("messageText"); 
 
         // 渲染菜單商品
         function renderMenu(filteredProducts = products) {
-            menuEl.innerHTML = ""; // 清空現有菜單
+            menuEl.innerHTML = ""; 
             filteredProducts.forEach(product => {
                 const itemDiv = document.createElement("div");
                 itemDiv.classList.add("menu-item");
@@ -1078,19 +1060,18 @@
             });
         }
 
-        // 渲染購物車
         function renderCart() {
-            cartList.innerHTML = ""; // 清空現有購物車列表
-            let total = 0; // 初始化總金額
-            let itemCount = 0; // 初始化購物車商品總數量
+            cartList.innerHTML = ""; 
+            let total = 0; 
+            let itemCount = 0; 
 
             for (const productId in cart) {
-                const product = products.find(p => p.id == productId); // 找到對應的商品
+                const product = products.find(p => p.id == productId); 
                 if (product) {
                     const quantity = cart[productId];
                     const itemTotal = product.price * quantity;
                     total += itemTotal;
-                    itemCount += quantity; // 累計商品總數量
+                    itemCount += quantity;
 
                     const cartItemDiv = document.createElement("div");
                     cartItemDiv.classList.add("cart-item");
@@ -1107,27 +1088,22 @@
                     cartList.appendChild(cartItemDiv);
                 }
             }
-            totalEl.textContent = `總金額：NT$${total}`; // 更新總金額顯示
-            cartItemCountEl.textContent = itemCount; // 更新導覽列的購物車商品數量
+            totalEl.textContent = `總金額：NT$${total}`; 
+            cartItemCountEl.textContent = itemCount; 
         }
 
-        // 加入購物車
         function addToCart(productId) {
             if (cart[productId]) {
                 cart[productId]++;
             } else {
                 cart[productId] = 1;
             }
-            renderCart(); // 重新渲染購物車
+            renderCart(); 
         }
-
-        // 移除購物車商品
         function removeFromCart(productId) {
             delete cart[productId];
-            renderCart(); // 重新渲染購物車
+            renderCart();
         }
-
-        // 調整商品數量
         function updateQuantity(productId, action) {
             if (action === "increase") {
                 cart[productId]++;
@@ -1135,13 +1111,12 @@
                 if (cart[productId] > 1) {
                     cart[productId]--;
                 } else {
-                    removeFromCart(productId); // 如果數量減到0，則移除商品
+                    removeFromCart(productId); 
                 }
             }
-            renderCart(); // 重新渲染購物車
+            renderCart(); 
         }
 
-        // 顯示商品詳細資訊彈出視窗
         function showModal(modalId, productOrMsg = null) {
             if (modalId === 'detailModal') {
                 modalImg.src = productOrMsg.img;
@@ -1154,7 +1129,6 @@
             }
         }
 
-        // 關閉商品詳細資訊彈出視窗
         function closeModal(modalId) {
             if (modalId === 'detailModal') {
                 detailModal.style.display = "none";
@@ -1162,11 +1136,9 @@
                 messageModal.style.display = "none";
             }
         }
-
-        // 搜尋及篩選功能
         function filterProducts() {
-            const searchTerm = searchEl.value.toLowerCase(); // 獲取搜尋關鍵字
-            const selectedCategory = catEl.value; // 獲取選定的分類
+            const searchTerm = searchEl.value.toLowerCase(); 
+            const selectedCategory = catEl.value; 
 
             const filtered = products.filter(product => {
                 const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
@@ -1174,21 +1146,17 @@
                 const matchesCategory = selectedCategory === "" || product.category === selectedCategory;
                 return matchesSearch && matchesCategory;
             });
-            renderMenu(filtered); // 渲染篩選後的菜單
+            renderMenu(filtered);
         }
 
-        // 初始化渲染
         document.addEventListener("DOMContentLoaded", () => {
-            renderMenu(); // 首次載入頁面時渲染菜單
-            renderCart(); // 首次載入頁面時渲染購物車
+            renderMenu(); 
+            renderCart(); 
 
-            // 監聽搜尋輸入框的輸入事件
             searchEl.addEventListener("input", filterProducts);
 
-            // 監聽分類選擇下拉菜單的變化事件
             catEl.addEventListener("change", filterProducts);
 
-            // 監聽菜單商品列表的點擊事件 (事件委託)
             menuEl.addEventListener("click", (event) => {
                 const target = event.target;
                 const productId = target.dataset.id;
@@ -1198,12 +1166,11 @@
                 } else if (target.classList.contains("detail-btn")) {
                     const product = products.find(p => p.id == productId);
                     if (product) {
-                        showModal('detailModal', product); // 傳遞商品資訊
+                        showModal('detailModal', product); 
                     }
                 }
             });
 
-            // 監聽購物車列表的點擊事件 (事件委託)
             cartList.addEventListener("click", (event) => {
                 const target = event.target;
                 const productId = target.dataset.id;
@@ -1217,30 +1184,24 @@
                 }
             });
 
-            // 監聽類別按鈕的點擊事件
             categoryButtons.forEach(button => {
                 button.addEventListener("click", (event) => {
-                    // 移除所有按鈕的 active 類別
                     categoryButtons.forEach(btn => btn.classList.remove("active"));
-                    // 為被點擊的按鈕添加 active 類別
                     event.target.classList.add("active");
 
                     const category = event.target.dataset.cat;
-                    catEl.value = category; // 更新下拉選單的值
-                    filterProducts(); // 執行篩選
+                    catEl.value = category; 
+                    filterProducts(); 
                 });
             });
 
-            // 監聽導覽列連結點擊，實現平滑滾動
             const navLinks = document.querySelectorAll('.main-navbar .navbar-links a');
-            const sections = document.querySelectorAll('main section, header.hero-section'); // 包含 hero section
+            const sections = document.querySelectorAll('main section, header.hero-section'); 
 
             navLinks.forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    // 移除所有連結的 active 類別
                     navLinks.forEach(link => link.classList.remove('active'));
-                    // 為當前點擊的連結添加 active 類別
                     this.classList.add('active');
 
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
@@ -1249,11 +1210,10 @@
                 });
             });
 
-            // 監聽滾動事件來更新導覽列的活動狀態
             window.addEventListener('scroll', () => {
                 let current = '';
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - document.querySelector('.main-navbar').offsetHeight; // 考慮導覽列高度
+                    const sectionTop = section.offsetTop - document.querySelector('.main-navbar').offsetHeight;
                     const sectionHeight = section.clientHeight;
                     if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
                         current = section.getAttribute('id');
@@ -1266,24 +1226,18 @@
                         link.classList.add('active');
                     }
                 });
-
-                // 特殊處理首頁 (hero-section)
-                // 如果滾動位置在第一個 section (服務) 之前，則將服務連結設為活動狀態
                 if (pageYOffset < sections[1].offsetTop - document.querySelector('.main-navbar').offsetHeight) {
                     navLinks.forEach(link => link.classList.remove('active'));
                     document.querySelector('.main-navbar .navbar-links a[href="#services"]').classList.add('active');
                 }
             });
 
-            // 聯絡表單提交事件
             contactForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // 阻止表單預設提交行為
+                event.preventDefault(); 
 
-                // 這裡可以加入表單數據的處理邏輯，例如發送到後端
-                // 為了示範，我們只顯示一個成功訊息
 
-                showModal('messageModal', "我們已收到您的表單訊息"); // 顯示訊息彈出視窗
-                contactForm.reset(); // 清空表單
+                showModal('messageModal', "我們已收到您的表單訊息"); 
+                contactForm.reset(); 
             });
         });
     </script>
