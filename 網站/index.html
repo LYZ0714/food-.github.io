@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <title>美食天堂｜精緻購物車</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== 基本重置 & 字體 ===== */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            font-family: "Microsoft JhengHei", sans-serif; /* 使用微軟正黑體 */
+            background: #fdfaf5; /* 更柔和的背景色 */
+            color: #333; /* 調整主要文字顏色 */
+            min-height: 100vh; /* 確保 body 佔滿整個視窗高度 */
+            font-size: 1.15rem; /* 整體基礎字體調整為 rem 單位，更具彈性 */
+            line-height: 1.7; /* 增加行高，提升閱讀性 */
+            -webkit-font-smoothing: antialiased; /* 字體抗鋸齒 */
+            -moz-osx-font-smoothing: grayscale; /* 字體抗鋸齒 */
+        }
+        h1, h2, h3 { margin: .6em 0; color: #d35400; /* 標題使用更深的美食橘色 */ font-weight: 700; }
+        h1 { font-size: 3.5rem; /* 放大 */ line-height: 1.2; }
+        h2 { font-size: 2.8rem; /* 放大 */ line-height: 1.3; }
+        h3 { font-size: 2.0rem; /* 放大 */ line-height: 1.4; }
+
+        /* ===== 新增的頂部導覽列樣式 ===== */
+        .main-navbar {
+            background-color: #FFF3E0; /* 導覽列背景色更淺 */
+            padding: 1.2rem 3rem; /* 內邊距加大 */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* 陰影更明顯 */
+            position: sticky; /* 讓導覽列在滾動時固定在頂部 */
+            top: 0;
+            z-index: 50; /* 確保在其他內容之上 */
+        }
+        .main-navbar .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px; /* 限制導覽列內容寬度加大 */
+            margin: 0 auto;
+        }
+        .main-navbar .navbar-brand {
+            font-family: 'Georgia', serif;
+            font-size: 2.3rem; /* 品牌名稱放大 */
+            font-weight: bold;
+            color: #e65100; /* 品牌名稱顏色 */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .main-navbar .navbar-brand:hover {
+            color: #ff8c00;
+        }
+        .main-navbar .navbar-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2.5rem; /* 連結間距稍微縮小，更緊湊 */
+        }
+        .main-navbar .navbar-links a {
+            color: #4a4a4a; /* 連結文字顏色調整為深色，增加對比 */
+            text-decoration: none;
+            font-weight: 600; /* 調整字重 */
+            font-size: 1.25rem; /* 連結文字稍微縮小 */
+            padding: 0.6rem 1rem; /* 增加左右內邊距，提供更好的點擊區域 */
+            border-radius: 0.5rem; /* 增加圓角 */
+            transition: all 0.3s ease; /* 統一過渡效果 */
+            border-bottom: 4px solid transparent; /* 預設透明下劃線 */
+        }
+        .main-navbar .navbar-links a:hover {
+            color: #e65100; /* 懸停顏色更深 */
+            background-color: #ffe0b2; /* 懸停背景色 */
+            border-bottom: 4px solid #e65100; /* 懸停下劃線顏色 */
+            transform: translateY(-2px); /* 輕微上浮效果 */
+        }
+        .main-navbar .navbar-links a.active {
+            color: #e65100; /* 活動狀態顏色 */
+            background-color: #ffe0b2; /* 活動狀態背景色 */
+            border-bottom: 4px solid #e65100; /* 活動狀態下劃線顏色 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 活動狀態陰影 */
+        }
+
+        /* 導覽列購物車圖示與數量 */
+        .main-navbar .navbar-links #navbarCartLink {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-right: 2.5rem; /* 為徽章留出空間 */
+        }
+        .main-navbar .navbar-links #cartItemCount {
+            background-color: #ff5722; /* 紅橙色徽章背景 */
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 0.2em 0.6em; /* 調整內邊距以形成良好形狀 */
+            position: absolute;
+            top: -0.5em; /* 調整位置 */
+            right: 0.5em; /* 調整位置 */
+            min-width: 1.8em; /* 確保足以顯示兩位數 */
+            text-align: center;
+            line-height: 1; /* 防止額外行高影響位置 */
+            transform: translate(50%, -50%); /* 微調定位 */
+            pointer-events: none; /* 允許點擊穿透到連結 */
+        }
+
+        /* ===== Hero 區塊樣式 ===== */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* 佔滿視窗高度 */
+            background-color: #ffe8af; /* 淺黃色 */
+            /* 使用淺黃色背景的預留圖片 */
+            background-image: url('https://placehold.co/FFFDE7/E65100?text=Food+Paradise'); /* 調整圖片文字 */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* 垂直置中 */
+            align-items: center; /* 水平置中 */
+            color: #fff;
+            overflow: hidden; /* 避免內容溢出 */
+            flex-shrink: 0; /* 防止在 flex 容器中縮小 */
+        }
+
+        /* 移除半透明疊層，即移除黑色陰影 */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0); /* 將透明度設為0，移除陰影 */
+            z-index: 1; /* 確保在背景圖上，但在內容之下 */
+        }
+
+        /* Hero 內容樣式 */
+        .hero-content {
+            position: relative; /* 確保內容在疊層之上 */
+            z-index: 2;
+            padding: 3rem; /* 加大內邊距 */
+            max-width: 1000px; /* 進一步加大內容寬度 */
+            text-align: center; /* 將文字改為置中對齊 */
+        }
+
+        .hero-subtitle {
+            font-size: 2.2rem; /* 顯著縮小字體 */
+            margin-bottom: 1.2rem; /* 增加間距 */
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            color: #f8f8f8;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6); /* 添加更明顯陰影 */
+        }
+
+        .hero-title {
+            font-size: 5.5rem; /* 顯著縮小字體 */
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 3.5rem; /* 增加間距 */
+            text-transform: uppercase;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.8); /* 添加更明顯陰影 */
+        }
+
+        .hero-button {
+            background-color: #ffc107; /* 柔和的橘黃色按鈕 */
+            color: #333; /* 按鈕文字顏色調整為深色，以增加對比 */
+            padding: 1.6rem 4rem; /* 加大按鈕內邊距 */
+            border: none;
+            border-radius: 1rem; /* 圓角加大 */
+            font-size: 1.6rem; /* 加大字體 */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4); /* 按鈕陰影更明顯 */
+        }
+
+        .hero-button:hover {
+            background-color: #ffb300; /* 懸停時顏色更深一點 */
+            transform: translateY(-5px); /* 懸停時輕微上浮 */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5); /* 懸停時陰影更深 */
+        }
+
+        /* ===== 主內容 ===== */
+        main {
+            padding: 50px; /* 內邊距加大 */
+            flex: 1;
+            background-color: #fffdf8; /* 保持與 body 相似的背景色 */
+            max-width: 1300px; /* 限制主內容寬度加大 */
+            margin: 0 auto; /* 置中 */
+        }
+        /* 搜尋 + 下拉 + 類別按鈕 */
+        .filter-row {
+            display: flex; flex-wrap: wrap;
+            gap: 20px; /* 間距加大 */
+            margin-bottom: 30px; /* 間距加大 */
+        }
+        #searchInput, #categorySelect {
+            padding: 15px; /* 內邊距加大 */
+            font-size: 1.1rem; /* 字體調整 */
+            border: 1px solid #ccc; border-radius: 10px; /* 圓角加大 */
+            flex: 1 1 250px; /* 彈性寬度調整 */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.08); /* 內陰影調整 */
+        }
+        .category-buttons button {
+            padding: 12px 20px; /* 內邊距加大 */
+            font-size: 1.1rem; /* 字體調整 */
+            border: none; border-radius: 10px; /* 圓角加大 */
+            background: #ffc107;
+            color: #8b4513;
+            cursor: pointer; transition: background .3s, transform .2s, box-shadow 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* 陰影調整 */
+            font-weight: 600; /* 調整字重 */
+        }
+        .category-buttons button:hover {
+            transform: translateY(-3px); /* 懸停時輕微上浮 */
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        .category-buttons button.active {
+            background: #ff8c00;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+        }
+        .category-buttons { margin-bottom: 30px; /* 間距加大 */ }
+
+        /* ===== 商品格子 ===== */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); /* 最小寬度加大 */
+            gap: 30px; /* 間距加大 */
+        }
+        .menu-item {
+            background: #ffffff;
+            border-radius: 18px; /* 圓角加大 */
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* 陰影更明顯 */
+            font-size: 1.1rem; /* 字體調整 */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+        .menu-item:hover {
+            transform: translateY(-8px); /* 懸停時輕微上浮 */
+            box-shadow: 0 10px 22px rgba(0,0,0,0.3);
+        }
+        .menu-item img {
+            width: 100%; aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+        .menu-item h3 {
+            margin: 18px; font-size: 1.6rem; /* 字體調整 */
+            color: #d35400;
+        }
+        .menu-item p {
+            margin: 0 18px; font-size: 1.0rem; /* 字體調整 */
+            color: #666;
+        }
+        .menu-item .btn-group {
+            display: flex; gap: 15px; /* 間距加大 */
+            flex-wrap: wrap;
+            padding: 18px; /* 內邊距加大 */
+        }
+        .menu-item button {
+            flex: 1; padding: 14px; /* 內邊距加大 */
+            border: none; border-radius: 12px; /* 圓角加大 */
+            font-size: 1.1rem; /* 字體調整 */
+            cursor: pointer;
+            transition: background .3s, transform .2s, box-shadow 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            font-weight: 600; /* 調整字重 */
+        }
+        .menu-item button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        .menu-item .detail-btn {
+            background: #ffc107;
+            color: #333;
+        }
+        .menu-item .detail-btn:hover {
+            background: #ffb300;
+        }
+        .menu-item .add-btn {
+            background: #ff5722;
+            color: #fff;
+        }
+        .menu-item .add-btn:hover {
+            background: #e64a19;
+        }
+
+        /* ===== 購物車區塊 ===== */
+        #cart {
+            margin-top: 60px; /* 間距加大 */
+            background: #fff8e1; padding: 30px; /* 內邊距加大 */
+            border-radius: 15px; /* 圓角加大 */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 陰影調整 */
+        }
+        .cart-item {
+            display: flex; justify-content: space-between;
+            align-items: center; padding: 18px 0; /* 內邊距加大 */
+            border-bottom: 1px dashed #ffcc80;
+            flex-wrap: wrap;
+            font-size: 1.1rem; /* 字體調整 */
+        }
+        .qty-buttons, .remove-btn {
+            display: flex; gap: 12px; /* 間距加大 */
+        }
+        .qty-buttons button,
+        .remove-btn {
+            padding: 10px 15px; font-size: 1.0rem; /* 字體調整 */
+            border: none; border-radius: 10px; /* 圓角加大 */
+            cursor: pointer;
+            transition: background .3s, transform .2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: 600; /* 調整字重 */
+        }
+        .qty-buttons button:hover { background: #ffc107; transform: translateY(-2px); }
+        .remove-btn { background: #e57373; color: #fff; }
+        .remove-btn:hover { background: #d32f2f; transform: translateY(-2px); }
+        .cart-total {
+            text-align: right; margin-top: 30px; /* 間距加大 */
+            font-size: 1.6rem; /* 字體調整 */
+            font-weight: bold;
+            color: #e65100;
+        }
+
+        /* ===== Modal 商品詳細 ===== */
+        #detailModal, #messageModal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75); /* 更深的背景疊層 */
+            display: none;
+            align-items: center; justify-content: center; padding: 30px; /* 內邊距加大 */
+            z-index: 100;
+        }
+        #detailModal .modal-content, #messageModal .modal-content {
+            background: #fff; border-radius: 20px; /* 圓角加大 */
+            max-width: 650px; /* 調整最大寬度 */
+            width: 100%; padding: 40px; /* 內邊距加大 */
+            position: relative;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4); /* 更明顯的陰影 */
+            text-align: center; /* 訊息內容置中 */
+        }
+        #detailModal .close-btn, #messageModal .close-btn {
+            position: absolute; top: 20px; right: 20px; /* 調整位置 */
+            background: none; border: none; font-size: 2.2rem; /* 加大字體 */
+            color: #999; /* 顏色調整 */
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        #detailModal .close-btn:hover, #messageModal .close-btn:hover {
+            color: #555;
+        }
+        #detailModal img {
+            width: 100%; aspect-ratio:1/1; object-fit: cover;
+            border-radius: 12px; /* 圓角加大 */
+            margin-bottom: 25px; /* 間距加大 */
+        }
+        #detailModal h3 {
+            margin: 0 0 15px; color: #e65100;
+            font-size: 2.0rem; /* 字體調整 */
+        }
+        #detailModal p {
+            font-size: 1.2rem; /* 字體調整 */
+            color: #555;
+            line-height: 1.8;
+        }
+        #messageModal p {
+            font-size: 1.5rem; /* 訊息文字加大 */
+            color: #333;
+            margin-bottom: 25px;
+        }
+        #messageModal button {
+            background-color: #ff5722;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #messageModal button:hover {
+            background-color: #e64a19;
+        }
+
+
+        /* 服務區塊的樣式 */
+        .section {
+            padding: 4rem 3rem; /* 內邊距加大 */
+            max-width: 1200px; /* 寬度加大 */
+            margin: 60px auto; /* 調整上下邊距 */
+            font-family: 'Inter', sans-serif;
+            background-color: #fff8e1;
+            border-radius: 18px; /* 圓角加大 */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12); /* 陰影調整 */
+        }
+        .section-title {
+            text-align: center;
+            font-size: 3.0rem; /* 稍微加大字體 */
+            color: #e65100;
+            margin-bottom: 3.5rem; /* 間距加大 */
+            font-weight: 700;
+        }
+        .services {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            gap: 2.5rem; /* 調整間距，使其更緊湊 */
+            flex-wrap: nowrap; /* 預設不換行 */
+        }
+        .service {
+            flex: 1 1 320px; /* 調整基礎寬度 */
+            background-color: #ffffff;
+            padding: 2.5rem; /* 內邊距縮小 */
+            border-radius: 1.5rem; /* 圓角加大 */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* 更明顯的陰影 */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+        .service:hover {
+            transform: translateY(-12px); /* 向上輕微移動 */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        .service i {
+            font-size: 4rem; /* 加大圖示大小 */
+            color: #ffc107;
+            background: #fff3cd;
+            padding: 1.5rem; /* 內邊距縮小 */
+            border-radius: 50%;
+            margin-bottom: 1.5rem; /* 間距縮小 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+        }
+        .service h3 {
+            font-size: 2.0rem; /* 字體調整 */
+            color: #4a4a4a;
+            margin-bottom: 1rem; /* 間距縮小 */
+        }
+        .service p {
+            font-size: 1.1rem; /* 字體調整 */
+            color: #777;
+            line-height: 1.7; /* 行高調整 */
+        }
+
+        /* ===== 關於我們區塊樣式 ===== */
+        .about-us-section {
+            background-color: #fff8e1;
+            padding: 60px; /* 內邊距加大 */
+            border-radius: 20px; /* 圓角加大 */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* 陰影調整 */
+            max-width: 1200px;
+            margin: 60px auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px; /* 間距加大 */
+        }
+        .about-us-section .content {
+            flex: 1;
+            min-width: 300px; /* 最小寬度 */
+        }
+        .about-us-section .image-container {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        .about-us-section img {
+            max-width: 100%;
+            border-radius: 15px; /* 圓角加大 */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* 陰影調整 */
+        }
+        .about-us-section h2 {
+            text-align: left; /* 標題左對齊 */
+            margin-bottom: 20px;
+            color: #e65100;
+        }
+        .about-us-section p {
+            font-size: 1.1rem; /* 字體調整 */
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        /* ===== 表單區塊樣式 ===== */
+        .contact-form {
+            background-color: #fff8e1;
+            padding: 40px; /* 內邊距加大 */
+            border-radius: 18px; /* 圓角加大 */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+            max-width: 800px; /* 限制表單寬度加大 */
+            margin: 60px auto; /* 置中並增加上下間距 */
+        }
+        .contact-form h2 {
+            text-align: center;
+            margin-bottom: 40px; /* 間距加大 */
+            color: #e65100;
+        }
+        .form-group {
+            margin-bottom: 30px; /* 間距加大 */
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 12px; /* 間距加大 */
+            font-weight: bold;
+            color: #555;
+            font-size: 1.1rem; /* 字體調整 */
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 16px; /* 內邊距加大 */
+            border: 1px solid #ddd;
+            border-radius: 12px; /* 圓角加大 */
+            font-size: 1.1rem; /* 字體調整 */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.08);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group textarea:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 5px rgba(255, 179, 0, 0.3); /* 聚焦時的陰影調整 */
+            outline: none;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 180px; /* 最小高度加大 */
+        }
+        .contact-form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 20px; /* 內邊距加大 */
+            border: none;
+            border-radius: 12px; /* 圓角加大 */
+            background-color: #ff5722;
+            color: #fff;
+            font-size: 1.3rem; /* 字體調整 */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* 陰影調整 */
+        }
+        .contact-form button[type="submit"]:hover {
+            background-color: #e64a19;
+            transform: translateY(-5px); /* 懸停時輕微上浮 */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        /* ===== 頁尾樣式 ===== */
+        footer {
+            background-color: #333;
+            color: #f8f8f8;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 1.0rem; /* 字體調整 */
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+        }
+        footer .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        footer p {
+            margin: 0.5em 0;
+        }
+        footer .social-links a {
+            color: #f8f8f8;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        footer .social-links a:hover {
+            color: #ffc107;
+        }
+
+
+        /* ===== 響應式設計 ===== */
+        @media (max-width: 1200px) {
+            .main-navbar .navbar-container {
+                max-width: 960px;
+            }
+            main {
+                max-width: 960px;
+            }
+            .hero-title {
+                font-size: 5rem; /* 調整字體大小 */
+            }
+            .hero-subtitle {
+                font-size: 2.0rem; /* 調整字體大小 */
+            }
+            .hero-button {
+                padding: 1.4rem 3.5rem;
+                font-size: 1.4rem;
+            }
+            .section {
+                max-width: 960px;
+            }
+            .section-title {
+                font-size: 2.8rem;
+            }
+            .services {
+                gap: 2rem; /* 調整間距 */
+            }
+            .service {
+                flex: 1 1 280px;
+                padding: 2.2rem; /* 調整內邊距 */
+            }
+            .about-us-section {
+                padding: 50px;
+                gap: 30px;
+            }
+            .about-us-section p {
+                font-size: 1.1rem;
+            }
+            .contact-form {
+                max-width: 700px;
+                padding: 35px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            body {
+                font-size: 1rem; /* 調整基礎字體 */
+            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2.1rem; }
+            h3 { font-size: 1.8rem; }
+
+            .main-navbar {
+                padding: 1rem 1.5rem;
+            }
+            .main-navbar .navbar-brand {
+                font-size: 2rem;
+            }
+            .main-navbar .navbar-links {
+                gap: 2rem;
+            }
+            .main-navbar .navbar-links a {
+                font-size: 1.1rem;
+            }
+            .hero-section {
+                height: 75vh;
+            }
+            .hero-title {
+                font-size: 4.5rem; /* 調整字體大小 */
+            }
+            .hero-subtitle {
+                font-size: 1.8rem; /* 調整字體大小 */
+            }
+            .hero-button {
+                padding: 1.2rem 3rem;
+                font-size: 1.3rem;
+            }
+            main {
+                padding: 30px;
+            }
+            .filter-row {
+                gap: 15px;
+                margin-bottom: 25px;
+            }
+            #searchInput, #categorySelect {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            .category-buttons button {
+                padding: 10px 18px;
+                font-size: 1rem;
+            }
+            .menu-grid {
+                grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+                gap: 25px;
+            }
+            .menu-item {
+                font-size: 1rem;
+            }
+            .menu-item h3 {
+                font-size: 1.4rem;
+            }
+            .menu-item p {
+                font-size: 0.95rem;
+            }
+            .menu-item button {
+                padding: 12px;
+                font-size: 1rem;
+            }
+            #cart {
+                padding: 25px;
+            }
+            .cart-item {
+                font-size: 1rem;
+            }
+            .cart-total {
+                font-size: 1.4rem;
+            }
+            .contact-form {
+                padding: 35px;
+                max-width: 700px;
+            }
+            .contact-form h2 {
+                font-size: 2.2rem;
+            }
+            .form-group label {
+                font-size: 1rem;
+            }
+            .form-group input, .form-group textarea {
+                padding: 14px;
+                font-size: 1rem;
+            }
+            .contact-form button[type="submit"] {
+                padding: 16px;
+                font-size: 1.2rem;
+            }
+            .section {
+                padding: 3rem 2rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .services {
+                gap: 1.5rem; /* 調整間距 */
+            }
+            .service {
+                flex: 1 1 280px;
+                padding: 2rem; /* 調整內邊距 */
+            }
+            .service i {
+                font-size: 3.5rem; /* 調整圖示大小 */
+                padding: 1.2rem; /* 調整內邊距 */
+                margin-bottom: 1.2rem; /* 調整間距 */
+            }
+            .service h3 {
+                font-size: 1.8rem; /* 調整字體大小 */
+                margin-bottom: 0.8rem; /* 調整間距 */
+            }
+            .service p {
+                font-size: 1.05rem; /* 調整字體大小 */
+                line-height: 1.6; /* 調整行高 */
+            }
+            .about-us-section {
+                padding: 40px;
+                gap: 25px;
+            }
+            .about-us-section h2 {
+                font-size: 2.2rem;
+            }
+            .about-us-section p {
+                font-size: 1.05rem;
+            }
+            footer {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 0.9rem; /* 調整基礎字體 */
+            }
+            h1 { font-size: 2.0rem; }
+            h2 { font-size: 1.7rem; }
+            h3 { font-size: 1.5rem; }
+
+            .main-navbar .navbar-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .main-navbar .navbar-links {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 1rem;
+                align-items: center;
+            }
+            .main-navbar .navbar-links a {
+                width: auto;
+                text-align: center;
+                padding: 0.6rem 0;
+                font-size: 0.95rem;
+            }
+            .hero-section {
+                height: 60vh; /* 小螢幕高度調整 */
+            }
+            .hero-title {
+                font-size: 2.5rem; /* 調整字體大小 */
+            }
+            .hero-subtitle {
+                font-size: 1.4rem; /* 調整字體大小 */
+            }
+            .hero-button {
+                padding: 0.9rem 2.2rem;
+                font-size: 1.0rem;
+            }
+
+            main {
+                padding: 20px; /* 主內容調整內邊距 */
+            }
+            .filter-row {
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            #searchInput, #categorySelect {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            .category-buttons button {
+                padding: 8px 14px;
+                font-size: 0.9rem;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr; /* 商品格子單欄顯示 */
+                gap: 15px;
+            }
+            .menu-item {
+                font-size: 0.9rem;
+            }
+            .menu-item h3 {
+                font-size: 1.2rem;
+            }
+            .menu-item p {
+                font-size: 0.8rem;
+            }
+            .menu-item button {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+            #cart {
+                padding: 18px;
+            }
+            .cart-item {
+                font-size: 0.9rem;
+            }
+            .cart-total {
+                font-size: 1.1rem;
+            }
+            .contact-form {
+                padding: 25px;
+            }
+            .contact-form h2 {
+                font-size: 1.8rem;
+            }
+            .form-group label {
+                font-size: 0.95rem;
+            }
+            .form-group input, .form-group textarea {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+            .contact-form button[type="submit"] {
+                padding: 12px;
+                font-size: 1.0rem;
+            }
+            .section {
+                padding: 1.8rem 1.2rem;
+            }
+            .section-title {
+                font-size: 2.0rem;
+            }
+            .services {
+                /* 在小螢幕上允許換行，以避免水平滾動條 */
+                flex-wrap: wrap;
+                gap: 1.2rem;
+            }
+            .service {
+                flex: 1 1 100%;
+                padding: 1.8rem;
+            }
+            .service i {
+                font-size: 3.2rem;
+                padding: 1.0rem;
+            }
+            .service h3 {
+                font-size: 1.6rem;
+            }
+            .service p {
+                font-size: 1.0rem;
+            }
+            .about-us-section {
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+            .about-us-section h2 {
+                text-align: center;
+                font-size: 2.0rem;
+            }
+            .about-us-section p {
+                font-size: 0.95rem;
+            }
+            footer {
+                padding: 20px 10px;
+            }
+            footer .social-links a {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="main-navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand">美食天堂</a>
+            <ul class="navbar-links">
+                <li><a href="#services">✨ 服務</a></li>
+                <li><a href="#about-us">ℹ️ 關於我們</a></li>
+                <li><a href="#menu">🍽️ 菜單</a></li>
+                <li><a href="#contact-us">✉️ 聯絡我們</a></li>
+                <li><a href="#cart" id="navbarCartLink">🛒 購物車 (<span id="cartItemCount">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-content">
+            <p class="hero-subtitle">歡迎來到美食天堂！</p>
+            <h1 class="hero-title">品嚐生活的美好</h1>
+            <button class="hero-button" onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });">立即探索菜單</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="services">
+            <h2 class="section-title">我們的服務</h2>
+            <div class="services">
+                <div class="service">
+                    <i class="fas fa-utensils"></i>
+                    <h3>多樣美食</h3>
+                    <p>提供各式各樣的健康料理與甜點。</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-leaf"></i>
+                    <h3>天然新鮮</h3>
+                    <p>嚴選天然食材，講究品質與營養。</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-truck-fast"></i>
+                    <h3>快速配送</h3>
+                    <p>便捷的配送服務，讓你快速享用美味。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-us-section" id="about-us">
+            <div class="content">
+                <h2 class="section-title">關於我們</h2>
+                <p>「美食天堂」致力於提供最新鮮、最美味的健康餐點。我們相信，好的食物不僅能滿足味蕾，更能滋養身心。從食材的嚴格挑選到烹飪的每一個細節，我們都堅持最高標準。</p>
+                <p>我們的廚師團隊擁有豐富的經驗與熱情，將傳統與創新完美結合，為您呈現一道道令人驚艷的料理。無論是精緻的午餐、豐盛的晚餐，或是下午茶的甜蜜時光，美食天堂都是您的最佳選擇。</p>
+                <p>我們期待能將這份對美食的熱愛，透過每一份餐點傳遞給您，讓您在忙碌的生活中，也能享受片刻的寧靜與美好。</p>
+            </div>
+            <div class="image-container">
+                <img src="封面.jpg" alt="我們的故事" onerror="this.onerror=null;this.src='https://placehold.co/600x400/FFFDE7/E65100?text=Our+Story';">
+            </div>
+        </section>
+
+        <section id="menu">
+            <h1>菜單介紹</h1>
+
+            <div class="filter-row">
+                <input type="text" id="searchInput" placeholder="搜尋商品..." />
+                <select id="categorySelect">
+                    <option value="">所有分類</option>
+                    <option value="肉品">肉品</option>
+                    <option value="海鮮">海鮮</option>
+                    <option value="主食">主食</option>
+                    <option value="湯品">湯品</option>
+                </select>
+            </div>
+
+            <div class="category-buttons">
+                <button class="active" data-cat="">全部</button>
+                <button data-cat="肉品">肉品</button>
+                <button data-cat="海鮮">海鮮</button>
+                <button data-cat="主食">主食</button>
+                <button data-cat="湯品">湯品</button>
+            </div>
+
+            <div class="menu-grid" id="menuItems"></div>
+        </section>
+
+        <section id="cart">
+            <h2>🛒 購物車</h2>
+            <div id="cartList"></div>
+            <div class="cart-total" id="total">總金額：NT$0</div>
+        </section>
+
+        <section class="contact-form" id="contact-us">
+            <h2>✉️ 聯絡我們</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">姓名:</label>
+                    <input type="text" id="name" name="name" required placeholder="請輸入您的姓名">
+                </div>
+                <div class="form-group">
+                    <label for="email">電子郵件:</label>
+                    <input type="email" id="email" name="email" required placeholder="請輸入您的電子郵件">
+                </div>
+                <div class="form-group">
+                    <label for="message">您的訊息:</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="請輸入您的訊息..."></textarea>
+                </div>
+                <button type="submit">送出訊息</button>
+            </form>
+        </section>
+
+    </main>
+    <div id="detailModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('detailModal')">×</button>
+            <img id="modalImg" src="" alt="商品圖片" onerror="this.onerror=null;this.src='https://placehold.co/400x400/E0E0E0/666666?text=No+Image';">
+            <h3 id="modalName"></h3>
+            <p id="modalDesc"></p>
+        </div>
+    </div>
+
+    <div id="messageModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('messageModal')">×</button>
+            <p id="messageText"></p>
+            <button onclick="closeModal('messageModal')">確認</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 美食天堂. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-line"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 商品數據
+        const products = [
+            { id:1,name:"原味舒肥雞胸",category:"肉品",price:150,desc:"滋嫩多肉，美味可口。採用低溫慢煮技術，完整保留雞肉的鮮甜與營養，口感軟嫩多汁，是健康飲食的絕佳選擇。",img:"1.jpg" },
+            { id:2,name:"舒肥義式香料雞翅",category:"肉品",price:250,desc:"低脂高蛋白的健康首選。以多種義式香料醃製，風味獨特，搭配舒肥烹調，肉質鮮嫩入味，令人回味無窮。",img:"2.jpg" },
+            { id:3,name:"麻油松阪豬",category:"湯品",price:120,desc:"香氣逼人，肉質鮮嫩順口。嚴選松阪豬肉，以傳統麻油烹調，香氣四溢，肉質彈牙不膩，是暖身滋補的美味。",img:"3.jpg" },
+            { id:4,name:"去骨油雞腿",category:"肉品",price:80,desc:"口感Q彈，肉質紮實。精選去骨雞腿，以獨家秘方滷製，皮Q肉嫩，香氣撲鼻，是餐桌上的經典美味。",img:"4.jpg" },
+            { id:5,name:"蘑菇奶油雞",category:"主菜",price:110,desc:"特調奶油醬，口感豐滿。鮮嫩雞肉與新鮮蘑菇完美結合，搭配濃郁奶油醬汁，口感滑順，香氣四溢。",img:"5.jpg" },
+            { id:6,name:"美國干貝",category:"海鮮",price:280,desc:"鮮嫩多汁，特製醬汁。來自美國的頂級干貝，肉質飽滿，鮮甜多汁，簡單烹調即可品嚐其原始美味，搭配特製醬汁更添風味。",img:"6.jpg" },
+            { id:7,name:"咖哩牛頰",category:"主菜",price:180,desc:"肉Q彈美味，豐富纖維",img:"7.jpg" },
+            { id:8,name:"牛丼",category:"主菜",price:90,desc:"鮮嫩多汁，特製醬汁",img:"8.jpg" },
+            { id:9,name:"番茄牛腱",category:"肉品",price:100,desc:"慢燉洋蔥的香甜與濃郁起司的結合，口感豐富，溫暖開胃，是法式料理的經典開胃菜。",img:"9.jpg" },
+        ];
+        const cart = {}; // 購物車物件，以商品ID為鍵，儲存數量
+        const menuEl = document.getElementById("menuItems"); // 菜單商品列表容器
+        const searchEl = document.getElementById("searchInput"); // 搜尋輸入框
+        const catEl = document.getElementById("categorySelect"); // 分類選擇下拉菜單
+        const cartList = document.getElementById("cartList"); // 購物車商品列表容器
+        const totalEl = document.getElementById("total"); // 總金額顯示元素
+        const detailModal = document.getElementById("detailModal"); // 商品詳細資訊彈出視窗
+        const modalImg = document.getElementById("modalImg"); // 彈出視窗中的商品圖片
+        const modalName = document.getElementById("modalName"); // 彈出視窗中的商品名稱
+        const modalDesc = document.getElementById("modalDesc"); // 彈出視窗中的商品描述
+        const categoryButtons = document.querySelectorAll(".category-buttons button"); // 類別按鈕
+        const cartItemCountEl = document.getElementById("cartItemCount"); // 導覽列購物車商品數量顯示元素
+        const contactForm = document.getElementById("contactForm"); // 聯絡表單
+        const messageModal = document.getElementById("messageModal"); // 訊息彈出視窗
+        const messageText = document.getElementById("messageText"); // 訊息彈出視窗的文字內容
+
+        // 渲染菜單商品
+        function renderMenu(filteredProducts = products) {
+            menuEl.innerHTML = ""; // 清空現有菜單
+            filteredProducts.forEach(product => {
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("menu-item");
+                itemDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x400/E0E0E0/666666?text=No+Image';">
+                    <h3>${product.name}</h3>
+                    <p>NT$${product.price}</p>
+                    <div class="btn-group">
+                        <button class="detail-btn" data-id="${product.id}">查看詳情</button>
+                        <button class="add-btn" data-id="${product.id}">加入購物車</button>
+                    </div>
+                `;
+                menuEl.appendChild(itemDiv);
+            });
+        }
+
+        // 渲染購物車
+        function renderCart() {
+            cartList.innerHTML = ""; // 清空現有購物車列表
+            let total = 0; // 初始化總金額
+            let itemCount = 0; // 初始化購物車商品總數量
+
+            for (const productId in cart) {
+                const product = products.find(p => p.id == productId); // 找到對應的商品
+                if (product) {
+                    const quantity = cart[productId];
+                    const itemTotal = product.price * quantity;
+                    total += itemTotal;
+                    itemCount += quantity; // 累計商品總數量
+
+                    const cartItemDiv = document.createElement("div");
+                    cartItemDiv.classList.add("cart-item");
+                    cartItemDiv.innerHTML = `
+                        <span>${product.name} x ${quantity}</span>
+                        <div class="qty-buttons">
+                            <button data-id="${product.id}" data-action="decrease">-</button>
+                            <span>${quantity}</span>
+                            <button data-id="${product.id}" data-action="increase">+</button>
+                        </div>
+                        <span>NT$${itemTotal}</span>
+                        <button class="remove-btn" data-id="${product.id}">移除</button>
+                    `;
+                    cartList.appendChild(cartItemDiv);
+                }
+            }
+            totalEl.textContent = `總金額：NT$${total}`; // 更新總金額顯示
+            cartItemCountEl.textContent = itemCount; // 更新導覽列的購物車商品數量
+        }
+
+        // 加入購物車
+        function addToCart(productId) {
+            if (cart[productId]) {
+                cart[productId]++;
+            } else {
+                cart[productId] = 1;
+            }
+            renderCart(); // 重新渲染購物車
+        }
+
+        // 移除購物車商品
+        function removeFromCart(productId) {
+            delete cart[productId];
+            renderCart(); // 重新渲染購物車
+        }
+
+        // 調整商品數量
+        function updateQuantity(productId, action) {
+            if (action === "increase") {
+                cart[productId]++;
+            } else if (action === "decrease") {
+                if (cart[productId] > 1) {
+                    cart[productId]--;
+                } else {
+                    removeFromCart(productId); // 如果數量減到0，則移除商品
+                }
+            }
+            renderCart(); // 重新渲染購物車
+        }
+
+        // 顯示商品詳細資訊彈出視窗
+        function showModal(modalId, productOrMsg = null) {
+            if (modalId === 'detailModal') {
+                modalImg.src = productOrMsg.img;
+                modalName.textContent = productOrMsg.name;
+                modalDesc.textContent = productOrMsg.desc;
+                detailModal.style.display = "flex";
+            } else if (modalId === 'messageModal') {
+                messageText.textContent = productOrMsg;
+                messageModal.style.display = "flex";
+            }
+        }
+
+        // 關閉商品詳細資訊彈出視窗
+        function closeModal(modalId) {
+            if (modalId === 'detailModal') {
+                detailModal.style.display = "none";
+            } else if (modalId === 'messageModal') {
+                messageModal.style.display = "none";
+            }
+        }
+
+        // 搜尋及篩選功能
+        function filterProducts() {
+            const searchTerm = searchEl.value.toLowerCase(); // 獲取搜尋關鍵字
+            const selectedCategory = catEl.value; // 獲取選定的分類
+
+            const filtered = products.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
+                                      product.desc.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === "" || product.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+            renderMenu(filtered); // 渲染篩選後的菜單
+        }
+
+        // 初始化渲染
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMenu(); // 首次載入頁面時渲染菜單
+            renderCart(); // 首次載入頁面時渲染購物車
+
+            // 監聽搜尋輸入框的輸入事件
+            searchEl.addEventListener("input", filterProducts);
+
+            // 監聽分類選擇下拉菜單的變化事件
+            catEl.addEventListener("change", filterProducts);
+
+            // 監聽菜單商品列表的點擊事件 (事件委託)
+            menuEl.addEventListener("click", (event) => {
+                const target = event.target;
+                const productId = target.dataset.id;
+
+                if (target.classList.contains("add-btn")) {
+                    addToCart(productId);
+                } else if (target.classList.contains("detail-btn")) {
+                    const product = products.find(p => p.id == productId);
+                    if (product) {
+                        showModal('detailModal', product); // 傳遞商品資訊
+                    }
+                }
+            });
+
+            // 監聽購物車列表的點擊事件 (事件委託)
+            cartList.addEventListener("click", (event) => {
+                const target = event.target;
+                const productId = target.dataset.id;
+
+                if (target.classList.contains("remove-btn")) {
+                    removeFromCart(productId);
+                } else if (target.dataset.action === "increase") {
+                    updateQuantity(productId, "increase");
+                } else if (target.dataset.action === "decrease") {
+                    updateQuantity(productId, "decrease");
+                }
+            });
+
+            // 監聽類別按鈕的點擊事件
+            categoryButtons.forEach(button => {
+                button.addEventListener("click", (event) => {
+                    // 移除所有按鈕的 active 類別
+                    categoryButtons.forEach(btn => btn.classList.remove("active"));
+                    // 為被點擊的按鈕添加 active 類別
+                    event.target.classList.add("active");
+
+                    const category = event.target.dataset.cat;
+                    catEl.value = category; // 更新下拉選單的值
+                    filterProducts(); // 執行篩選
+                });
+            });
+
+            // 監聽導覽列連結點擊，實現平滑滾動
+            const navLinks = document.querySelectorAll('.main-navbar .navbar-links a');
+            const sections = document.querySelectorAll('main section, header.hero-section'); // 包含 hero section
+
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // 移除所有連結的 active 類別
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    // 為當前點擊的連結添加 active 類別
+                    this.classList.add('active');
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // 監聽滾動事件來更新導覽列的活動狀態
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - document.querySelector('.main-navbar').offsetHeight; // 考慮導覽列高度
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // 特殊處理首頁 (hero-section)
+                // 如果滾動位置在第一個 section (服務) 之前，則將服務連結設為活動狀態
+                if (pageYOffset < sections[1].offsetTop - document.querySelector('.main-navbar').offsetHeight) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    document.querySelector('.main-navbar .navbar-links a[href="#services"]').classList.add('active');
+                }
+            });
+
+            // 聯絡表單提交事件
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // 阻止表單預設提交行為
+
+                // 這裡可以加入表單數據的處理邏輯，例如發送到後端
+                // 為了示範，我們只顯示一個成功訊息
+
+                showModal('messageModal', "我們已收到您的表單訊息"); // 顯示訊息彈出視窗
+                contactForm.reset(); // 清空表單
+            });
+        });
+    </script>
+</body>
+</html>
